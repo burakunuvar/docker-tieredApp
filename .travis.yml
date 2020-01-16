@@ -4,18 +4,19 @@ services:
   - docker
 
 before_install:
-  - docker build -t burakunuvar/client-test -f ./client/Dockerfile.dev .
+  - docker build -t burakunuvar/frontend-test -f ./client/Dockerfile.dev ./client
 
 script:
-- docker run -e CI=true burakunuvar/client-test npm test
+  - docker run -e CI=true burakunuvar/client-test npm test
 
 after_success:
-- docker build -t burakunuvar/client-prod ./client
-- docker build -t burakunuvar/nginx-prod ./nginx
-- docker build -t burakunuvar/server-prod ./server
-- docker build -t burakunuvar/worker-prod ./worker
-- echo "$docker_password" | docker login -u "$docker_username" --password-stdin
-- docker push burakunuvar/client-prod ./client
-- docker push burakunuvar/nginx-prod ./nginx
-- docker push burakunuvar/server-prod ./server
-- docker push burakunuvar/worker-prod ./worker
+  - docker build -t burakunuvar/multi-client ./client
+  - docker build -t burakunuvar/multi-nginx./nginx
+  - docker build -t burakunuvar/multi-api ./api
+  - docker build -t burakunuvar/multi-worker ./worker
+  # login and push all to docker-hub
+  - echo "$docker_password" | docker login -u "$docker_username" --password-stdin
+  - docker push burakunuvar/multi-client
+  - docker push burakunuvar/multi-nginx
+  - docker push burakunuvar/multi-api
+  - docker push burakunuvar/multi-worker

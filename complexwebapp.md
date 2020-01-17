@@ -14,7 +14,11 @@
 - build default.conf file
 - include in dockerfile
 
-#### Put togetherher all in docker-compose
+#### Put together all in docker-compose
 - Run command `docker-compose up --build`
 - you might need to re-run to make sure db connection is built
 - websocket should be open for dev env
+
+#### Build .travis.yml for pipeline
+
+#### Build Dockerrun.aws.json for pipeline

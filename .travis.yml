@@ -11,7 +11,7 @@ script:
 
 after_success:
   - docker build -t burakunuvar/multi-client ./client
-  - docker build -t burakunuvar/multi-nginx./nginx
+  - docker build -t burakunuvar/multi-nginx ./nginx
   - docker build -t burakunuvar/multi-api ./api
   - docker build -t burakunuvar/multi-worker ./worker
   # login and push all to docker-hub
